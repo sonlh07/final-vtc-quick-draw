@@ -2,18 +2,28 @@ Quick Draw Recognition
 --
 
 ## Introduction
-This project is about somthing
+In 2016, Google released an online game titled “Quick, Draw!” — an AI experiment that has educated the public on neural networks and built an enormous dataset of over a billion drawings.
+
+Applications:
+
+1. Invent new games /business ideas
+
+2. Improving handwriting recognition
+
+In this project, will train some categories of Google public dataset to make Quick Draw Recognition web app. 
 
 ## TEFPA
-T = Classify object
 
-E = data set 
+1. Task: Classify draw image to correspond category.
 
-F = 
+2. Experience: Label image as correspond category.
 
-P = categorical_crossentropy
+3. Function Space: ...
 
-A =  CNN, ...
+4. Performance: Cross Entropy Loss.
+
+5. Algorithm: CNN.
+
 
 ## Installation 
 
@@ -40,23 +50,38 @@ Class: ```Effel Tower```
 
 
 ## Model
-I used the Keras Sequential API, where you have just to add one layer at a time, starting from the input.
 
-The first is the convolutional (Conv2D) layer. It is like a set of learnable filters. I choosed to set 32 filters for the two firsts conv2D layers and 64 filters for the two last ones. Each filter transforms a part of the image (defined by the kernel size) using the kernel filter. The kernel filter matrix is applied on the whole image. Filters can be seen as a transformation of the image.
+Keras Sequential API.
+Structures:
 
-The CNN can isolate features that are useful everywhere from these transformed images (feature maps).
+1. Convolutional (Conv2D) layer. 
+- It is like a set of learnable filters: 
+- 32 filters for the two firsts conv2D layers 
+- 64 filters for the two last ones.
 
-The second important layer in CNN is the pooling (MaxPool2D) layer. This layer simply acts as a downsampling filter. It looks at the 2 neighboring pixels and picks the maximal value. These are used to reduce computational cost, and to some extent also reduce overfitting. We have to choose the pooling size (i.e the area size pooled each time) more the pooling dimension is high, more the downsampling is important.
+2. Pooling (MaxPool2D) layer: 
+- acts as a downsampling filter.
+- picks the maximal value 2 neighboring pixels. 
+- reduce computational cost
+- reduce overfitting. 
+- more the pooling dimension is high, more the downsampling is important.
 
-Combining convolutional and pooling layers, CNN are able to combine local features and learn more global features of the image.
+3. Dropout: 
+- randomly ignored for each training sample. 
+- drops randomly a propotion of the network 
+- forces the network to learn features in a distributed way.
 
-Dropout is a regularization method, where a proportion of nodes in the layer are randomly ignored (setting their wieghts to zero) for each training sample. This drops randomly a propotion of the network and forces the network to learn features in a distributed way. This technique also improves generalization and reduces the overfitting.
+4. Relu: 
+- the rectifier
+- used to add non linearity to the network.
 
-'relu' is the rectifier (activation function max(0,x). The rectifier activation function is used to add non linearity to the network.
+5. Flatten layer: 
+- convert the final feature maps into a one single 1D vector. 
 
-The Flatten layer is use to convert the final feature maps into a one single 1D vector. This flattening step is needed so that you can make use of fully connected layers after some convolutional/maxpool layers. It combines all the found local features of the previous convolutional layers.
+6. Last two fully-connected (Dense) layers:
+- artificial an neural networks (ANN) classifier. 
+- In the last layer outputs distribution of probability of each class.
 
-In the end i used the features in two fully-connected (Dense) layers which is just artificial an neural networks (ANN) classifier. In the last layer(Dense(10,activation="softmax")) the net outputs distribution of probability of each class.
 
 ![model](images/models.png)
 
@@ -77,6 +102,8 @@ In the end i used the features in two fully-connected (Dense) layers which is ju
 ## Training & validation
 
 Train the model:
+
+```cd src```
 
 ```python train.py```
 

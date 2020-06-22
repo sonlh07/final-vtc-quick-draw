@@ -5,6 +5,7 @@ from scipy import ndimage
 import math
 import matplotlib.pyplot as plt
 from PIL import Image, ImageFilter
+from tensorflow.python.keras.callbacks import CSVLogger
 from tensorflow.python.keras.callbacks import ModelCheckpoint
 from tensorflow.python.keras.utils.np_utils import to_categorical
 
@@ -30,22 +31,22 @@ def getBestShift(img):
 
 
 def pre_process(img):
-    img=255-np.array(img).reshape(28,28).astype(np.uint8)
+    img = 255-np.array(img).reshape(28,28).astype(np.uint8)
     (thresh, gray) = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
     while np.sum(gray[0]) == 0:
         gray = gray[1:]
 
-    while np.sum(gray[:,0]) == 0:
+    while np.sum(gray[:, 0]) == 0:
         gray = np.delete(gray,0,1)
 
     while np.sum(gray[-1]) == 0:
         gray = gray[:-1]
 
-    while np.sum(gray[:,-1]) == 0:
+    while np.sum(gray[:, -1]) == 0:
         gray = np.delete(gray,-1,1)
 
-    rows,cols = gray.shape
+    rows, cols = gray.shape
 
     if rows > cols:
         factor = 20.0/rows
@@ -58,18 +59,18 @@ def pre_process(img):
         rows = int(round(rows*factor))
         gray = cv2.resize(gray, (cols, rows))
 
-    colsPadding = (int(math.ceil((28-cols)/2.0)),int(math.floor((28-cols)/2.0)))
-    rowsPadding = (int(math.ceil((28-rows)/2.0)),int(math.floor((28-rows)/2.0)))
-    gray = np.lib.pad(gray,(rowsPadding,colsPadding),'constant')
+    colsPadding = (int(math.ceil((28-cols)/2.0)), int(math.floor((28-cols)/2.0)))
+    rowsPadding = (int(math.ceil((28-rows)/2.0)), int(math.floor((28-rows)/2.0)))
+    gray = np.lib.pad(gray, (rowsPadding,colsPadding), 'constant')
 
-    shiftx,shifty = getBestShift(gray)
+    shiftx, shifty = getBestShift(gray)
     shifted = shift(gray,shiftx,shifty)
     gray = shifted
 
     img = gray.reshape(28, 28, 1).astype(np.float32)
 
-    img-= int(33.3952)
-    img/= int(78.6662)
+    img -= int(33.3952)
+    img /= int(78.6662)
     return img
 
 
@@ -143,6 +144,11 @@ def view_image(image):
 def view_sample(image):
     plt.imshow(image[:, :, 0], cmap=plt.get_cmap('gray'))
     plt.show()
+
+
+def get_logger():
+    csv_logger = CSVLogger('saved/training.log', separator=',', append=False)
+    return csv_logger
 
 
 def get_check_point(saved_path):
