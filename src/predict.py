@@ -17,12 +17,11 @@ def predict_from_file(image_path):
     img_data = np.array(utils.image_prepare(image_path))
     img_data = img_data.reshape([28, 28, 1])
     img_data = np.array([img_data])
-
     model = dr_model.get_cnn_model()
     model.load_weights(cnn_weight_path)
     list_names = get_list_class_names()
 
-    prob = model.predict(np.array([img_data]))[0]
+    prob = model.predict(img_data)[0]
     index = np.argmax(prob)
 
     return {
@@ -45,4 +44,5 @@ def predict_image(img):
     }
 
 
-
+# if __name__ == '__main__':
+#     print(predict_from_file(predict_image_path))

@@ -26,4 +26,4 @@ if __name__ == '__main__':
     X, y = convert_for_CNN(X, y)
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1, test_size=0.2)
     model = get_cnn_model()
-    train(model, X_train, y_train, X_test, y_test, 10)
+    train(model, X_train, y_train, X_test, y_test, 1)

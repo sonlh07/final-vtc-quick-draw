@@ -20,7 +20,7 @@ def view_data_count():
 
 
 def train_history():
-    data = pd.read_csv('../training.log')
+    data = pd.read_csv('../saved/training.log')
 
     print(data[
               'accuracy'
