@@ -95,13 +95,13 @@ Structures:
 | ---------- |-------------------|
 | **Author**       | Le Hung Son|
 | **Title**        | Quick Draw Recognition |
-| **Topics**       | Ứng dụng trong computer vision, làm game, sử dụng thuật toán chính là CNN|
-| **Descriptions** | Input là danh sách các numpy array được lưu trong file ```*.npy```, tên file chính là tên object tương ứng. Khi train xong sẽ trả ra output là file trọng số ```doodle_cnn_model.hdf5```. Ta sẽ sử dụng trọng số này đã train để predict.|
+| **Topics**       | Applications in computer vision, game making, using the main algorithm is CNN|
+| **Descriptions** | Input is the list of numpy arrays stored in the file ```*.npy```. The file name is the corresponding object name. When the training is complete, the output will be the weight file ```doodle_cnn_model.hdf5```. We will use this trained weight to predict.|
 | **Links**        | https://github.com/sonlh07/final-vtc-quick-draw |
 | **Framework**    | Tensorflow|
 | **Pretrained Models**  | |
-| **Datasets**     |Mô hình được train với bộ dữ liệu https://github.com/googlecreativelab/quickdraw-dataset|
-| **Level of difficulty**|Sử dụng nhanh và dễ, có thể train lại với tập dữ liệu khác tốc độ tùy thuộc vào phần cứng và hình ảnh input|
+| **Datasets**     |The model is trained with the dataset: https://github.com/googlecreativelab/quickdraw-dataset|
+| **Level of difficulty**|Use fast and easy, could be training back with other speed data files into the hard and image input|
 
 
 ## Training & validation
